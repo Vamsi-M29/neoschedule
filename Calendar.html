@@ -1,0 +1,783 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Vamsi Calendar Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "error-container": "#ffdad6",
+                "error": "#ba1a1a",
+                "on-surface-variant": "#45464d",
+                "on-background": "#191c1e",
+                "outline": "#76777d",
+                "inverse-on-surface": "#eff1f3",
+                "surface-container-high": "#e6e8ea",
+                "surface-container": "#eceef0",
+                "secondary-fixed": "#d8e2ff",
+                "on-surface": "#191c1e",
+                "on-primary-fixed-variant": "#3f465c",
+                "primary-fixed": "#dae2fd",
+                "surface-tint": "#565e74",
+                "surface-bright": "#f7f9fb",
+                "secondary-container": "#2170e4",
+                "primary": "#0f172a",
+                "on-primary-fixed": "#131b2e",
+                "background": "#f7f9fb",
+                "on-secondary": "#ffffff",
+                "outline-variant": "#c6c6cd",
+                "on-tertiary-fixed-variant": "#38485d",
+                "on-error-container": "#93000a",
+                "inverse-surface": "#2d3133",
+                "secondary": "#0058be",
+                "on-secondary-fixed": "#001a42",
+                "surface-dim": "#d8dadc",
+                "on-tertiary-fixed": "#0b1c30",
+                "on-error": "#ffffff",
+                "tertiary-fixed-dim": "#b7c8e1",
+                "primary-fixed-dim": "#bec6e0",
+                "surface-container-lowest": "#ffffff",
+                "surface-container-highest": "#e0e3e5",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#004395",
+                "on-tertiary-container": "#75859d",
+                "primary-container": "#131b2e",
+                "tertiary": "#000000",
+                "surface-container-low": "#f2f4f6",
+                "inverse-primary": "#bec6e0",
+                "secondary-fixed-dim": "#adc6ff",
+                "tertiary-fixed": "#d3e4fe",
+                "on-primary-container": "#7c839b",
+                "on-primary": "#ffffff",
+                "on-secondary-container": "#fefcff",
+                "tertiary-container": "#0b1c30",
+                "surface": "#f7f9fb",
+                "surface-variant": "#e0e3e5"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "xl": "32px",
+                "base": "4px",
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "xs": "4px",
+                "margin-desktop": "48px",
+                "lg": "24px",
+                "md": "16px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "label-md": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-lg-mobile": [
+                        "Inter"
+                ],
+                "body-sm": [
+                        "Inter"
+                ],
+                "label-sm": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Inter"
+                ],
+                "headline-xl": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.03em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "36px",
+                        {
+                                "lineHeight": "44px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .ambient-shadow { box-shadow: 0px 2px 8px rgba(0,0,0,0.05); }
+        .elevated-shadow { box-shadow: 0px 8px 20px rgba(79, 70, 229, 0.15); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .time-line::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background-color: #ba1a1a; z-index: 10; }
+        .time-dot { width: 10px; height: 10px; background-color: #ba1a1a; border-radius: 50%; position: absolute; left: -4px; top: calc(50% - 4px); z-index: 11; }
+    </style>
+<style>
+    @keyframes fadeSlideUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseLine {
+        0% { opacity: 1; }
+        50% { opacity: 0.6; }
+        100% { opacity: 1; }
+    }
+    @keyframes breathe {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.03); }
+    }
+    @keyframes slideRight {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideLeft {
+        from { opacity: 0; transform: translateX(20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    .animate-fade-slide-up { animation: fadeSlideUp 0.6s ease-out forwards; }
+    .animate-pulse-line::after { animation: pulseLine 2s infinite ease-in-out; }
+    .animate-breathe { animation: breathe 3s infinite ease-in-out; }
+    .transition-all-custom { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .calendar-cell-active { background-color: rgba(33, 112, 228, 0.1); border-color: #2170e4; }
+</style></head>
+<body class="bg-background text-on-background font-body-lg h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant shadow-sm flex flex-col h-full py-lg z-40 hidden md:flex animate-fade-slide-up">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-lg text-headline-lg text-primary">Web Calendar</h1>
+</div>
+<div class="px-md mb-lg">
+<div class="flex items-center gap-md p-sm rounded-lg bg-surface-container-low mb-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-headline-md font-bold">VM</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface font-semibold">Effortless Organiser</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Premium Plan</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200 flex items-center justify-center gap-sm elevated-shadow mt-md animate-breathe" onclick="openModal()">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Create Event
+            </button>
+</div>
+<div class="px-md mb-lg animate-fade-slide-up">
+  <div class="flex items-center justify-between mb-sm">
+    <h3 class="font-label-md text-label-md font-bold text-on-surface">May 2026</h3>
+    <div class="flex gap-xs">
+      <button class="p-1 rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+        <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+      </button>
+      <button class="p-1 rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+        <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+      </button>
+    </div>
+  </div>
+  <div class="grid grid-cols-7 text-center mb-xs">
+    <span class="font-label-sm text-[10px] text-outline uppercase">S</span>
+    <span class="font-label-sm text-[10px] text-outline uppercase">M</span>
+    <span class="font-label-sm text-[10px] text-outline uppercase">T</span>
+    <span class="font-label-sm text-[10px] text-outline uppercase">W</span>
+    <span class="font-label-sm text-[10px] text-outline uppercase">T</span>
+    <span class="font-label-sm text-[10px] text-outline uppercase">F</span>
+    <span class="font-label-sm text-[10px] text-outline uppercase">S</span>
+  </div>
+  <div class="grid grid-cols-7 gap-y-1 text-center">
+    <span class="text-[11px] text-outline py-1">26</span>
+    <span class="text-[11px] text-outline py-1">27</span>
+    <span class="text-[11px] text-outline py-1">28</span>
+    <span class="text-[11px] text-outline py-1">29</span>
+    <span class="text-[11px] text-outline py-1">30</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">1</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">2</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">3</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">4</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">5</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">6</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">7</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">8</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">9</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">10</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">11</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">12</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">13</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">14</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">15</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">16</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">17</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">18</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">19</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">20</span>
+    <span class="text-[11px] bg-primary text-on-primary font-bold py-1 rounded-full shadow-sm">21</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">22</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">23</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">24</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">25</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">26</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">27</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">28</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">29</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">30</span>
+    <span class="text-[11px] text-on-surface py-1 hover:bg-surface-container rounded-full cursor-pointer">31</span>
+    <span class="text-[11px] text-outline py-1">1</span>
+    <span class="text-[11px] text-outline py-1">2</span>
+    <span class="text-[11px] text-outline py-1">3</span>
+    <span class="text-[11px] text-outline py-1">4</span>
+    <span class="text-[11px] text-outline py-1">5</span>
+    <span class="text-[11px] text-outline py-1">6</span>
+  </div>
+</div><ul class="flex-1 px-sm space-y-xs">
+<li class="">
+<button class="nav-link w-full flex items-center gap-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm font-bold transition-all-custom" id="nav-calendar" onclick="switchView('calendar')">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md text-label-md">Calendar</span>
+</button>
+</li>
+<li class="">
+<button class="nav-link w-full flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-colors rounded-lg transition-all-custom" id="nav-tasks" onclick="switchView('tasks')">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-md text-label-md">Tasks</span>
+</button>
+</li>
+<li class="">
+<button class="nav-link w-full flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-colors rounded-lg transition-all-custom" id="nav-archive" onclick="switchView('archive')">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">Archive</span>
+</button>
+</li>
+<li class="">
+<button class="nav-link w-full flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-colors rounded-lg transition-all-custom" id="nav-settings" onclick="switchView('settings')">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</button>
+</li>
+</ul>
+<div class="px-sm mt-auto border-t border-outline-variant pt-sm">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-0 md:ml-64 flex flex-col h-screen overflow-hidden animate-fade-slide-up">
+<!-- TopAppBar -->
+<header class="bg-surface w-full h-16 border-b border-outline-variant flex justify-between items-center px-lg py-sm sticky top-0 z-30">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Toggle (hidden on desktop) -->
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<button class="px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-high transition-colors" onclick="goToToday()">Today</button>
+<div class="flex items-center gap-xs">
+<button class="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors text-on-surface" onclick="prevMonth()">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center transition-colors text-on-surface" onclick="nextMonth()">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface min-w-[200px]" id="header-month-year">May 2026</h2>
+</div>
+<div class="flex items-center gap-lg">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-outline">search</span>
+<input class="pl-xl pr-sm py-xs bg-surface-container-low border border-outline-variant rounded-full font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none w-64 text-on-surface placeholder-on-surface-variant" placeholder="Search events..." type="text">
+</div>
+<div class="flex items-center gap-sm text-primary">
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-low transition-colors duration-200 flex items-center justify-center cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-low transition-colors duration-200 flex items-center justify-center cursor-pointer active:scale-95 hidden md:flex">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-low transition-colors duration-200 flex items-center justify-center cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<main class="flex-1 flex flex-col overflow-hidden bg-background relative" id="main-content">
+<!-- Calendar View -->
+<div class="flex-1 flex flex-col lg:flex-row overflow-hidden w-full h-full" id="view-calendar">
+<!-- Main Full Calendar Grid -->
+<div class="flex-1 flex flex-col bg-surface overflow-hidden relative border-r border-outline-variant" id="main-calendar-container">
+<!-- Days of week header -->
+<div class="grid grid-cols-7 border-b border-outline-variant text-center py-sm bg-surface-container-lowest z-10 shadow-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase">Sun</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Mon</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Tue</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Wed</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Thu</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Fri</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Sat</span>
+</div>
+<!-- Grid container -->
+<div class="flex-1 overflow-hidden relative">
+<div class="absolute inset-0 grid grid-cols-7 gap-px bg-outline-variant overflow-y-auto w-full h-full grid-rows-6" id="calendar-grid"><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">26</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">27</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">28</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">29</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">30</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">1</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">2</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">3</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">4</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">5</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">6</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">7</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">8</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">9</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">10</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">11</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">12</div></div><div class="bg-secondary-container text-on-secondary-container text-xs px-2 py-1 rounded truncate mt-1">Dentist Appt</div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">13</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">14</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">15</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">16</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">17</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">18</div></div><div class="bg-primary-container text-on-primary-container text-xs px-2 py-1 rounded truncate mt-1">Q3 Marketing Strategy</div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">19</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">20</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface bg-primary-fixed border-t-2 !border-t-primary calendar-cell-active"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-bold w-7 h-7 flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm">21</div></div><div class="bg-primary text-on-primary text-xs px-2 py-1 rounded truncate mt-1 shadow-sm font-bold">Deep Work: Specs</div><div class="bg-surface-variant text-on-surface-variant text-xs px-2 py-1 rounded truncate mt-1">Lunch w/ Sarah</div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">22</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">23</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">24</div></div><div class="bg-error-container text-on-error-container text-xs px-2 py-1 rounded truncate mt-1">Project Deadline</div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">25</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">26</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">27</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">28</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">29</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">30</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-on-surface"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">31</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">1</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">2</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">3</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">4</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">5</div></div></div><div class="bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent text-outline bg-surface-container-lowest"><div class="flex justify-end w-full"><div class="font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors">6</div></div></div></div>
+</div>
+</div>
+<!-- Right Column: Daily Agenda -->
+<aside class="w-96 flex flex-col overflow-hidden relative bg-surface-container-lowest hidden xl:flex">
+<!-- Weekly Ribbon -->
+<div class="bg-surface border-b border-outline-variant px-md py-sm flex gap-md overflow-x-auto hide-scrollbar z-20">
+<div class="flex flex-col items-center justify-center min-w-[60px] p-xs rounded-lg text-on-surface-variant hover:bg-surface-container cursor-pointer">
+<span class="font-label-sm text-label-sm">Mon</span>
+<span class="font-headline-md text-headline-md">18</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[60px] p-xs rounded-lg text-on-surface-variant hover:bg-surface-container cursor-pointer">
+<span class="font-label-sm text-label-sm">Tue</span>
+<span class="font-headline-md text-headline-md">19</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[60px] p-xs rounded-lg text-on-surface-variant hover:bg-surface-container cursor-pointer">
+<span class="font-label-sm text-label-sm">Wed</span>
+<span class="font-headline-md text-headline-md">20</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[60px] p-xs rounded-lg bg-primary-container text-on-primary-container font-bold shadow-sm">
+<span class="font-label-sm text-label-sm">Thu</span>
+<span class="font-headline-md text-headline-md" id="agenda-focus-date">21</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[60px] p-xs rounded-lg text-on-surface-variant hover:bg-surface-container cursor-pointer">
+<span class="font-label-sm text-label-sm">Fri</span>
+<span class="font-headline-md text-headline-md">22</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[60px] p-xs rounded-lg text-outline hover:bg-surface-container cursor-pointer">
+<span class="font-label-sm text-label-sm">Sat</span>
+<span class="font-headline-md text-headline-md">23</span>
+</div>
+<div class="flex flex-col items-center justify-center min-w-[60px] p-xs rounded-lg text-outline hover:bg-surface-container cursor-pointer">
+<span class="font-label-sm text-label-sm">Sun</span>
+<span class="font-headline-md text-headline-md">24</span>
+</div>
+</div>
+<!-- Scrollable Agenda -->
+<div class="flex-1 overflow-y-auto p-md relative" id="agenda-container">
+<!-- Time Grid Background -->
+<div class="absolute inset-0 pointer-events-none" style="background-image: linear-gradient(to bottom, #e5eeff 1px, transparent 1px); background-size: 100% 120px; opacity: 0.3;"></div>
+<!-- Live Time Line (approx positioned for 05:18) -->
+<div class="absolute left-md right-md time-line pointer-events-none animate-pulse-line" style="top: 55%;">
+<div class="time-dot"></div>
+</div>
+<!-- Event Cards Container -->
+<div class="relative space-y-md ml-12">
+<!-- Event 1: Past -->
+<div class="bg-surface rounded-lg p-md border-l-4 border-outline-variant ambient-shadow opacity-60 transition-transform duration-200 hover:scale-[1.01] hover:opacity-100 cursor-pointer transition-all-custom hover:shadow-lg hover:-translate-y-1">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Q3 Marketing Strategy Sync</h3>
+<div class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-full font-label-sm text-label-sm">Work</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">09:00 AM - 10:30 AM</span>
+<span class="material-symbols-outlined text-[16px] ml-sm">videocam</span>
+<span class="">Zoom</span>
+</div>
+</div>
+<!-- Event 2: Past/Recent -->
+<div class="bg-surface rounded-lg p-md border-l-4 border-tertiary-fixed-dim ambient-shadow opacity-80 transition-transform duration-200 hover:scale-[1.01] hover:opacity-100 cursor-pointer mt-xl transition-all-custom hover:shadow-lg hover:-translate-y-1">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Lunch with Sarah</h3>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded-full font-label-sm text-label-sm">Personal</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">12:30 PM - 01:30 PM</span>
+<span class="material-symbols-outlined text-[16px] ml-sm">location_on</span>
+<span class="">Bistro Cafe</span>
+</div>
+</div>
+<!-- Event 3: Upcoming -->
+<div class="bg-surface rounded-lg p-md border-l-4 border-primary elevated-shadow transition-transform duration-200 hover:scale-[1.02] cursor-pointer mt-xl z-10 relative transition-all-custom hover:shadow-lg hover:-translate-y-1">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Deep Work: Design Specs</h3>
+<div class="bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded-full font-label-sm text-label-sm font-bold">Focus</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-label-sm text-label-sm mb-md">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-bold text-primary">02:00 PM - 04:00 PM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Finalize the high-fidelity mockups for the new dashboard layout. Review contrasting color requirements.</p>
+<div class="mt-md flex gap-sm">
+<img class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A small circular profile picture showing a young professional woman smiling slightly. The background is a blurred bright office setting. The lighting is soft and natural, emphasizing a modern, approachable aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjRAWFUM7HKULHDk8Xdb9HRYhItPkfftwMmovQVMm53kgAySiCsmAdhYaP2Zy1xY_oJaTXQPaoX0oFwrmDMTcz2Aa9HLtq_jIB-BHc9_Lj-Rsp_0lQi8fMDj3VX_cAVbwhQMovdFCECuWeadIbt6AAx8UNIs7CS8_rwvv6hxJ0H6nRkIvVSjWZuXDmQyHYYHIZ51iIQXpbrkkahj0u2RMfJUNRejESg-8lMArL2XlqQ6C7dEHYCjOijskOU_NxyrkesfVmQ37SMB0">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center font-label-sm text-label-sm text-on-surface">+2</div>
+</div>
+</div>
+<!-- Event 4: Later -->
+<div class="bg-surface rounded-lg p-md border-l-4 border-secondary-fixed-dim ambient-shadow transition-transform duration-200 hover:scale-[1.01] cursor-pointer mt-xl transition-all-custom hover:shadow-lg hover:-translate-y-1">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Team Retrospective</h3>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2 py-1 rounded-full font-label-sm text-label-sm">Meeting</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">04:30 PM - 05:30 PM</span>
+<span class="material-symbols-outlined text-[16px] ml-sm">meeting_room</span>
+<span class="">Conference Room A</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Tasks View -->
+<div class="hidden flex-1 flex-col overflow-hidden w-full h-full p-lg overflow-y-auto" id="view-tasks">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Tasks</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Your task list will appear here.</p>
+</div>
+<!-- Archive View -->
+<div class="hidden flex-1 flex-col overflow-hidden w-full h-full p-lg overflow-y-auto" id="view-archive">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Archive</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Archived events and tasks will appear here.</p>
+</div>
+<!-- Settings View -->
+<div class="hidden flex-1 flex-col overflow-hidden w-full h-full p-lg overflow-y-auto" id="view-settings">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Settings</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Account and application settings will appear here.</p>
+</div>
+</main>
+</div>
+<!-- Create Event Modal -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-on-background/50 backdrop-blur-sm p-margin-mobile" id="create-event-modal">
+<div class="bg-surface rounded-xl shadow-lg w-full max-w-lg flex flex-col overflow-hidden max-h-full">
+<!-- Header -->
+<div class="flex justify-between items-center py-md px-margin-mobile bg-surface border-b border-surface-container">
+<button class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" onclick="closeModal()">Cancel</button>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Create Event</h2>
+<button class="text-secondary font-label-md text-label-md font-bold hover:text-secondary-container transition-colors" onclick="closeModal()">Save</button>
+</div>
+<!-- Body -->
+<div class="p-lg overflow-y-auto flex flex-col gap-lg bg-surface">
+<!-- Event Title -->
+<section class="group">
+<input class="w-full bg-transparent border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-secondary font-headline-lg-mobile text-headline-lg-mobile text-primary placeholder:text-outline-variant pb-xs px-0 transition-colors" placeholder="Event Title" type="text">
+</section>
+<!-- Date & Time Card -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-md shadow-sm flex flex-col gap-md">
+<!-- Date Picker Row -->
+<div class="flex items-center justify-between border-b border-surface-container pb-md">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: &quot;FILL&quot; 0;">event</span>
+</div>
+<span class="font-body-md text-body-md">Date</span>
+</div>
+<button class="font-label-md text-label-md text-primary bg-surface-container-low hover:bg-surface-container px-sm py-xs rounded transition-colors flex items-center gap-xs">
+                    Oct 24, 2023
+                    <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+<!-- Time Picker Row -->
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: &quot;FILL&quot; 0;">schedule</span>
+</div>
+<span class="font-body-md text-body-md">Time</span>
+</div>
+<div class="flex items-center justify-between pl-10">
+<button class="font-label-md text-label-md text-primary bg-surface-container-low hover:bg-surface-container px-sm py-xs rounded transition-colors w-[100px] text-center">
+                        09:00 AM
+                    </button>
+<span class="material-symbols-outlined text-outline-variant">arrow_right_alt</span>
+<button class="font-label-md text-label-md text-primary bg-surface-container-low hover:bg-surface-container px-sm py-xs rounded transition-colors w-[100px] text-center">
+                        10:00 AM
+                    </button>
+</div>
+</div>
+</section>
+<!-- Category Tags -->
+<section class="flex flex-col gap-sm">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Category</label>
+<div class="flex flex-wrap gap-sm">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-md py-sm rounded-full border border-primary transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">work</span>
+                    Work
+                </button>
+<button class="bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md px-md py-sm rounded-full border border-outline-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">person</span>
+                    Personal
+                </button>
+<button class="bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md px-md py-sm rounded-full border border-outline-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">group</span>
+                    Family
+                </button>
+</div>
+</section>
+<!-- Location Input -->
+<section class="flex flex-col gap-sm">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Location</label>
+<div class="relative flex items-center">
+<div class="absolute left-sm w-8 h-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">location_on</span>
+</div>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-12 pr-md py-sm font-body-md text-body-md text-primary placeholder:text-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary transition-all shadow-sm" placeholder="Add location" type="text">
+</div>
+</section>
+<!-- Notes Section -->
+<section class="flex flex-col gap-sm">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Notes</label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md font-body-md text-body-md text-primary placeholder:text-outline-variant focus:border-secondary focus:ring-1 focus:ring-secondary transition-all shadow-sm resize-none" placeholder="Add details or context..." rows="4"></textarea>
+<span class="material-symbols-outlined absolute top-md right-md text-outline-variant pointer-events-none">notes</span>
+</div>
+</section>
+</div>
+</div>
+</div>
+<script>
+        // Calendar Logic
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let currentDate = new Date();
+        let viewMonth = currentDate.getMonth();
+        let viewYear = currentDate.getFullYear();
+        let selectedDate = new Date(currentDate);
+
+        function renderCalendar(animationClass = '') {
+            const header = document.getElementById('header-month-year');
+            const grid = document.getElementById('calendar-grid');
+            
+            if(!header || !grid) return;
+            
+            header.innerText = `${monthNames[viewMonth]} ${viewYear}`;
+            
+            // Apply animation if provided
+            if(animationClass) {
+                grid.classList.remove('slideLeft', 'slideRight');
+                // trigger reflow
+                void grid.offsetWidth;
+                grid.style.animation = `${animationClass} 0.3s ease-out`;
+            }
+            
+            grid.innerHTML = '';
+            
+            const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+            const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(viewYear, viewMonth, 0).getDate();
+            
+            const totalCells = firstDay + daysInMonth > 35 ? 42 : 35;
+            grid.className = `absolute inset-0 grid grid-cols-7 gap-px bg-outline-variant overflow-y-auto w-full h-full grid-rows-${totalCells/7}`;
+            
+            // Sample Events Map (day -> html)
+            const sampleEvents = {
+                12: `<div class="bg-secondary-container text-on-secondary-container text-xs px-2 py-1 rounded truncate mt-1">Dentist Appt</div>`,
+                18: `<div class="bg-primary-container text-on-primary-container text-xs px-2 py-1 rounded truncate mt-1">Q3 Marketing Strategy</div>`,
+                21: `<div class="bg-primary text-on-primary text-xs px-2 py-1 rounded truncate mt-1 shadow-sm font-bold">Deep Work: Specs</div><div class="bg-surface-variant text-on-surface-variant text-xs px-2 py-1 rounded truncate mt-1">Lunch w/ Sarah</div>`,
+                24: `<div class="bg-error-container text-on-error-container text-xs px-2 py-1 rounded truncate mt-1">Project Deadline</div>`
+            };
+
+            for(let i=0; i<totalCells; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'bg-surface min-h-[100px] p-xs sm:p-sm flex flex-col gap-xs transition-all-custom hover:shadow-md hover:-translate-y-1 hover:z-10 cursor-pointer group relative border border-transparent';
+                
+                let dayNum;
+                let isCurrentMonth = false;
+                
+                if(i < firstDay) {
+                    dayNum = daysInPrevMonth - firstDay + i + 1;
+                    cell.classList.add('text-outline', 'bg-surface-container-lowest');
+                } else if (i >= firstDay && i < firstDay + daysInMonth) {
+                    dayNum = i - firstDay + 1;
+                    isCurrentMonth = true;
+                    cell.classList.add('text-on-surface');
+                    
+                    if(dayNum === currentDate.getDate() && viewMonth === currentDate.getMonth() && viewYear === currentDate.getFullYear()) {
+                        cell.classList.add('bg-primary-fixed', 'border-t-2', '!border-t-primary');
+                    }
+                    if(dayNum === selectedDate.getDate() && viewMonth === selectedDate.getMonth() && viewYear === selectedDate.getFullYear()) {
+                        cell.classList.add('calendar-cell-active');
+                    }
+                } else {
+                    dayNum = i - (firstDay + daysInMonth) + 1;
+                    cell.classList.add('text-outline', 'bg-surface-container-lowest');
+                }
+                
+                const headerRow = document.createElement('div');
+                headerRow.className = 'flex justify-end w-full';
+                
+                const numEl = document.createElement('div');
+                numEl.className = 'font-label-md text-label-md font-medium w-7 h-7 flex items-center justify-center rounded-full group-hover:bg-surface-container-high transition-colors';
+                
+                if(isCurrentMonth && dayNum === currentDate.getDate() && viewMonth === currentDate.getMonth() && viewYear === currentDate.getFullYear()) {
+                    numEl.className = 'font-label-md text-label-md font-bold w-7 h-7 flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm';
+                }
+                
+                numEl.innerText = dayNum;
+                headerRow.appendChild(numEl);
+                cell.appendChild(headerRow);
+                
+                if(isCurrentMonth && sampleEvents[dayNum]) {
+                    cell.innerHTML += sampleEvents[dayNum];
+                }
+                
+                cell.onclick = () => {
+                    if(isCurrentMonth) {
+                        selectedDate = new Date(viewYear, viewMonth, dayNum);
+                        renderCalendar();
+                        const focusEl = document.getElementById('agenda-focus-date');
+                        if(focusEl) focusEl.innerText = dayNum;
+                    }
+                };
+                
+                grid.appendChild(cell);
+            }
+        }
+
+        function prevMonth() {
+            viewMonth--;
+            if(viewMonth < 0) {
+                viewMonth = 11;
+                viewYear--;
+            }
+            renderCalendar('slideRight');
+        }
+        function nextMonth() {
+            viewMonth++;
+            if(viewMonth > 11) {
+                viewMonth = 0;
+                viewYear++;
+            }
+            renderCalendar('slideLeft');
+        }
+        function goToToday() {
+            currentDate = new Date();
+            const oldMonth = viewMonth;
+            const oldYear = viewYear;
+            viewMonth = currentDate.getMonth();
+            viewYear = currentDate.getFullYear();
+            selectedDate = new Date(currentDate);
+            
+            let anim = '';
+            if(viewYear < oldYear || (viewYear === oldYear && viewMonth < oldMonth)) anim = 'slideRight';
+            if(viewYear > oldYear || (viewYear === oldYear && viewMonth > oldMonth)) anim = 'slideLeft';
+            
+            renderCalendar(anim);
+            const focusEl = document.getElementById('agenda-focus-date');
+            if(focusEl) focusEl.innerText = currentDate.getDate();
+        }
+
+        // Initialize calendar on load
+        window.addEventListener('load', () => {
+            renderCalendar();
+            const container = document.getElementById('agenda-container');
+            if(container) {
+                container.scrollTop = container.scrollHeight * 0.3; 
+            }
+        });
+
+        // View Switching Logic
+        function switchView(viewId) {
+            const views = ['view-calendar', 'view-tasks', 'view-archive', 'view-settings'];
+            views.forEach(v => {
+                const el = document.getElementById(v);
+                if(el) el.classList.add('hidden');
+            });
+            
+            const activeView = document.getElementById('view-' + viewId);
+            if(activeView) activeView.classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                el.classList.add('text-on-surface-variant', 'hover:bg-surface-container');
+            });
+            
+            const activeLink = document.getElementById('nav-' + viewId);
+            if(activeLink) {
+                activeLink.classList.remove('text-on-surface-variant', 'hover:bg-surface-container');
+                activeLink.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold');
+            }
+            
+            if(viewId === 'calendar') renderCalendar();
+        }
+
+        // Modal Logic
+        function openModal() {
+            document.getElementById('create-event-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('create-event-modal').classList.add('hidden');
+        }
+    </script>
+
+
+</body></html>
